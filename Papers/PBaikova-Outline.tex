@@ -1,0 +1,256 @@
+\documentclass[11pt]{article}
+\usepackage{palatino}
+\usepackage[a4paper, top=1.0in, bottom=1.0in, left=1.0in, right=1.0in]{geometry}
+\usepackage{amsfonts,amsmath,amssymb}
+\usepackage{graphicx} 
+\usepackage{tikz}
+\usetikzlibrary{er,positioning}
+\usepackage[hyphens]{url}
+\linespread{2.0} 
+\usepackage{listings}
+\usepackage{caption}
+\usepackage{pdfpages}
+\usepackage{float}
+\usepackage{setspace}
+\usepackage{hyperref}
+\usepackage[numbers]{natbib}
+
+
+
+\begin{document}
+	
+	\pagestyle{empty}
+	{\noindent\bf Summer 2025 \hfill Polina Baikova}
+	\vskip 16pt
+	\centerline{\bf University of Central Florida}
+	\centerline{\bf College of Business}
+	\vskip 16pt
+	\centerline{\bf ECO6935-25}
+	\centerline{\bf Capstone in Business Analytics I}
+	\vskip 10pt
+	\centerline{\bf Understanding Housing Market Dynamics and Residential Property Valuation Patterns }
+	\centerline{\bf in Orlando, Florida Using Hedonic Price Modeling}
+    \centerline{\bf Outline}    
+	\vskip 22pt
+	\noindent
+	
+\renewcommand{\thesection}{\arabic{section}}
+\section{Introduction}
+
+The Orlando Metropolitan Area has emerged as one of the fastest-growing regions in the United States, leading Florida’s growth statistics in recent years. The area's population is projected to expand by nearly one million residents by $2045$. This rapid expansion presents significant challenges related to housing affordability, infrastructure development, and urban planning. 
+
+Over the past decade, median home prices in Orlando have nearly doubled, outpacing general inflation, reflecting real growth driven by increased demand, population influx, and constrained supply.
+
+Understanding Orlando housing market dynamics is crucial for informed decision-making by home-buyers, real estate developers, policymakers, and urban planners. This project aims to estimate home-buyers’ valuations of housing characteristics based on observed market sales transactions to uncover how different property and neighborhood attributes contribute to the price of residential properties in Orlando region. 
+
+\section{Literature Review}
+
+\subsection{Lancaster, K. J. (1966) — A New Approach to Consumer Theory}  
+
+\textit{Main ideas:} This paper was the first attempt to create a theoretical foundation for hedonic modeling and it fundamentally changed how economists think about consumer choice. Lancaster introduced a model where utility is derived from the attributes of goods, rather than the goods themselves. This reoriented demand theory to focus on product characteristics. 
+
+\textit{Project relevance:} Establishes the theoretical basis for treating a house as a bundle of characteristics.
+
+\subsection{Rosen, S. (1974) — Hedonic Prices and Implicit Markets: Product Differentiation in Pure Competition}  
+
+\textit{Main ideas:} Rosen argued that an item can be valued as the sum of its utility generating characteristics; that is, an item’s total price should be the sum of the individual prices of its characteristics. He developed the formal hedonic pricing model and showed how market equilibrium results in prices that reflect the value of individual attributes.  
+
+\textit{Project relevance:} Forms the foundational theory for this project’s empirical strategy, guiding the estimation of implicit prices and the interpretation of housing market data.
+
+\subsection{Cheshire, P., and Sheppard, S. (1995) — On the Price of Land and the Value of Amenities}  
+
+\textit{Main ideas:} This paper explains that a price of a house depends not only on the building itself but also on the land it occupies. The authors used spatial data to understand how consumers value location and showed that it is necessary to include both the accessibility aspect of location and a full range of neighborhood characteristics to get reliable estimates of the effects of either. 
+
+\textit{Project relevance:} Supports the importance of including location and amenity variables to accurately estimate how different factors contribute to housing values in the Orlando area.
+
+\subsection{Abelson, P. W. (1997) — Property Prices and the Value of Amenities}  
+
+\textit{Main ideas:} This paper examines the theoretical foundations and practical applications of hedonic pricing models. The author extended earlier hedonic pricing studies by estimating the implicit value of a wide range of environmental and neighborhood amenities in two areas of Sydney, Australia. The article explores how different functional forms affect estimation results, and emphasizes the value of focusing on neighborhood-level data to improve accuracy. 
+
+\textit{Project relevance:} Informs the choice of model design and the geographic scope of analysis in the project (analyzing housing prices at the ZIP-code level), warns of common empirical issues.
+
+
+\section{Theoretical Model}
+
+The framework follows Sherwin Rosen’s hedonic pricing theory, which decomposes the observed price of a differentiated good into the implicit values of its constituent attributes.  
+For housing, each unit is described by a vector of observable characteristics:  
+\[
+\mathbf z=(z_{1},z_{2},\ldots,z_{n})
+\]
+In a competitive housing market, the hedonic price function maps the attribute bundle to its market price:
+\[
+P(\mathbf z)=f(z_{1},z_{2},\ldots,z_{n})
+\]
+
+\subsection{Consumers side of the market}
+
+\textit{Utility-maximization.}  
+Consumer chooses composite consumption $x$ and housing bundle $\mathbf z$ that maximize their utility:  
+\[
+\max_{x,\mathbf z}\;U(x,\mathbf z)
+\quad\text{s.t.}\quad
+y=x+P(\mathbf z)
+\]
+where $y$ denotes income.
+
+\textit{First-order conditions:}  
+
+\[ \frac{\partial U(x,\mathbf z) / \partial z_i}{\partial U (x,\mathbf z)/ \partial x} =  
+\frac{\partial p(\mathbf{z})}{\partial z_i} \]
+
+The right-hand side is the implicit price of attribute $i$; the left-hand side is the marginal rate of substitution between $z_{i}$ and the composite commodity.
+
+\subsection{Producers side of the market}
+
+Producers supply goods of quality $\mathbf z$ and quantity $q$ to maximize profit:
+\[
+\max_{q,\mathbf z}\;\pi=qP(\mathbf z)-C(q,\mathbf z)
+\]
+
+Because a single house is typically marketed and sold as an indivisible unit, we will set $q=1$.
+
+\textit{First-order conditions:}
+\begin{align*}
+\text{(i)}\;&\frac{\partial P(\mathbf z)}{\partial z_{i}}= \frac{\partial C(q,\mathbf z)}{\partial z_{i}}
+\\[4pt]
+\text{(ii)}\;&P(\mathbf z)=\frac{\partial C(q,\mathbf z)}{\partial q}
+\end{align*}
+Condition (i) equates the implicit price of improving quality $z_{i}$ to its marginal cost; condition (ii) requires unit price to equal marginal production cost.
+
+\subsection{Hedonic Equilibrium}
+
+An equilibrium, a house $\mathbf z^{*}$ is traded at a price $P(\mathbf z^{*})$, and there exist a consumer and a producer such that:
+\[
+\underbrace{\frac{\partial U(x^{*},\mathbf z^{*})/\partial z_{i}}{\partial U(x^{*},\mathbf z^{*})/\partial x}}_{\text{Consumer MRS}}
+=
+\underbrace{\frac{\partial P(\mathbf z^*)}{\partial z_{i}}}_{\text{Implicit price}}
+=
+\underbrace{\frac{\partial C(q^{*},\mathbf z^{*})}{\partial z_{i}}}_{\text{Producer MC}}
+\]
+
+These conditions ensure that:
+\begin{itemize}
+    \item[-] Consumers choose $\mathbf z^{*}$ where their marginal willingness to pay equals the implicit price.
+    \item[-] Producers supply $\mathbf z^{*}$ where their marginal cost equals that same implicit price.  
+    \item[-] The set of $P(\mathbf z^*)$ pairs satisfying these equalities traces the hedonic price function --- the locus where consumers' bid and producers' offer curves are tangent and the market clears.
+    
+\end{itemize}
+
+
+Estimation of implicit prices that reveal the consumers' marginal willingness to pay has been the focus of the majority of empirical hedonic analyses and is referred to as the first stage of the hedonic. The second stage involves recovering demand and supply functions for attributes.
+
+This project focuses on the first stage of the hedonic analysis, concentrating on estimating and interpreting the implicit prices from observed housing market transactions.
+
+
+
+
+\section{Empirical Specification}
+
+\subsection{Data Characteristics}
+
+The data for this project covers residential property transactions from $2023$ -- $2024$ in $33$ ZIP codes within the Orlando postal region, defined as areas where the city name is listed as Orlando, FL.
+
+\textbf{Dependent variable:} Sale price ($P_i$) --- observed market-clearing price of property $i$.
+
+\textbf{Independent variables:}
+
+\textit{Structural characteristics ($\mathbf S_{is}$):} property-specific attributes recorded in transaction data that describe physical form, size, design, exterior and interior features of the property.
+
+\textit{Neighborhood characteristics ($\mathbf N_{in}$):} external environmental and locational factors that describe the socioeconomic, institutional, or geographic context surrounding the property.
+
+
+\subsection{Log-linear Hedonic Model}
+
+Hedonic regression is a specialized application of linear regression that models the price of a differentiated good as a function of its attributes. While the underlying estimation method remains ordinary least squares, the key distinction lies in the interpretation: each coefficient in a hedonic model represents the implicit price of a specific characteristic, holding all else constant. Linear regression is well-suited for this framework because it allows us to estimate how marginal changes in features affect market value. However, since housing attributes often exhibit non-constant effects --- particularly diminishing marginal returns --- a log-linear specification is typically preferred. This functional form linearizes multiplicative relationships and stabilizes variance, making coefficient interpretation more intuitive and empirically robust. The log-linear hedonic model takes the following form:
+
+\[
+\ln P_i \;=\;
+\beta_0
+\;+\;
+\sum_{s=1}^{S}\beta_{s}^{\text{STR}}\, S_{is}
+\;+\;
+\sum_{n=1}^{N}\beta_{n}^{\text{NBH}}\, N_{in}
+\;+\;
+\varepsilon_i,
+\]
+
+where $\mathbf S $ is a vector of structural housing unit characteristics, $\mathbf N $ is a vector of neighborhood characteristics, $\beta^{STR}$ and $\beta^{NBH}$ are the corresponding vectors of estimable coefficients, and $\varepsilon_i \sim \text{IID}(0,\sigma^{2})$ is an error term.
+
+
+\subsection{Interpretation of Coefficients}
+
+Given the log-linear price function, the marginal implicit price for any individual attribute $z_{ik}$ is given by:
+
+\[
+\frac{\partial P_i}{\partial z_{ik}} = \beta_k \, P_i
+\]
+
+This expression indicates that the marginal contribution of a one-unit increase in attribute $z_{ik}$ is proportional to both the estimated coefficient $\beta_k$ and the property's price $P_i$. Because the dependent variable is in logarithmic form, the coefficient $\beta_k$ can be interpreted as the approximate proportional effect on price --- so that $100 \cdot \beta_k \%$ is the percentage change in price resulting from a one-unit increase in $z_{ik}$, holding all other attributes constant.
+
+
+\subsection{Estimation Strategy}
+
+\textit{Estimation method.} Ordinary Least Squares regression using observed transaction data. 
+    
+\textit{Functional form considerations.}  
+
+To account for potential non-linear relationships between housing attributes and sale prices, various functional transformations should be considered. In particular, logarithmic and polynomial terms can be applied to reflect diminishing marginal returns. Additionally, interaction terms can be introduced where theoretically appropriate --- for example, to capture complementarities between features such as square footage and lot size.
+    
+\textit{Specification diagnostics.}
+
+Diagnostic tests should be conducted to assess the reliability and robustness of the estimated model. Heteroskedasticity is examined using the Breusch -- Pagan and White tests to determine whether the variance of residuals remains constant across observations. Multicollinearity is assessed through the computation of Variance Inflation Factors (VIFs), which help identify whether strong correlations among regressors may be inflating standard errors. Furthermore, the influence of individual observations is evaluated using leverage statistics and Cook’s distance to detect outliers that could unduly affect coefficient estimates.
+          
+\textit{Model fit.} 
+
+The overall explanatory power of the model will be summarized using standard goodness-of-fit measures, including the coefficient of determination ($R^2$), the adjusted $R^2$, and the root mean square error (RMSE). In addition to assessing how well the model explains variation in sale prices, the statistical significance of individual coefficients will be evaluated to determine the strength and reliability of each attribute's contribution to price.
+    
+\textit{Implicit prices.} 
+
+Estimated coefficients from the hedonic regression will be converted into measures of consumers’ marginal willingness to pay for each housing attribute. By examining how these implicit prices vary across geographic areas, particularly ZIP codes, the analysis can capture spatial heterogeneity in consumer preferences, offering insights into localized demand patterns and valuation differences.
+
+\section{Data}
+
+\subsection{Data Source}
+
+The analysis draws on the Zillow Properties Listing Information dataset, sourced from the Bright Data platform (\url{https://brightdata.com/}). 
+
+\subsection{Variables Overview}
+
+The dataset contains information on property-level features, which can be grouped into two categories:
+
+\textit{Structural Characteristics:} property type, living area (sqft), lot size (sqft), number of bedrooms and bathrooms, year built, parking, interior features, construction type, and exterior features.
+    
+\textit{Neighborhood Characteristics:} distance to elementary, middle and high schools, school ratings, distance to the main roads and highways, HOA details, community description (pool, fitness center, clubhouse, parks, playgrounds, boat ramps, gated community access etc.). 
+    
+
+\subsection{Data Preparation and Transformations}
+
+\textit{Data Cleaning and Handling Missing Values:} Select relevant variables, handle missing values, standardize data formats.
+
+\textit{Flattening Nested JSON-Like Columns:}
+Parse and flatten variables that contain nested lists of dictionaries by extracting individual feature titles and converting each unique feature into a separate column. 
+    
+\textit{Categorical Encoding:} One-hot-encode categorical variables such as \texttt{property\_type} and binary features such as \texttt{pool}.
+    
+\textit{Database Construction:} Build a relational SQLite database to store cleaned data and facilitate efficient querying.
+
+
+
+\section{Conclusions and Next Steps}
+
+This project develops a first-stage hedonic pricing model to estimate how structural and neighborhood characteristics influence residential property values in the Orlando postal region. 
+
+ The next phase of the project involves finalizing the data preparation process, including the flattening of nested variables and the encoding of categorical features to ensure compatibility with the regression framework. Once the dataset is fully cleaned and structured, the hedonic pricing model will be estimated using Ordinary Least Squares, accompanied by a series of robustness checks to assess specification validity and identify potential sources of bias. Following estimation, the analysis will focus on interpreting the resulting implicit prices and visualizing their variation across ZIP codes to uncover spatial heterogeneity in housing preferences. Finally, the model will be extended to incorporate interaction terms, allowing for a more nuanced understanding of how attribute effects may differ across contexts and supporting more robust causal inference.
+
+
+The results will provide valuable insights for real estate developers, urban planners, and policymakers working to address housing demand and affordability in the Orlando region.
+
+
+
+	
+\clearpage
+\nocite{*}
+\bibliographystyle{chicago}
+\bibliography{PBaikova-References}
+	
+\end{document}

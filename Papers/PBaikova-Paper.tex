@@ -1,0 +1,58 @@
+\documentclass[11pt]{article}
+\usepackage{palatino}
+\usepackage{setspace}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\usepackage{fancyhdr}
+\pagestyle{fancy}\fancyhf{}\renewcommand{\headrulewidth}{0pt}\fancyfoot[C]{\thepage}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{graphicx}\graphicspath{{../Figures/}}
+\usepackage{float}
+\usepackage[authoryear]{natbib}
+\usepackage{caption}
+\usepackage{pdfpages}
+\usepackage{booktabs}
+\usepackage{url}
+\IfFileExists{titlesec.sty}{\usepackage{titlesec}}{}
+\IfFileExists{tocloft.sty}{\usepackage{tocloft}}{}
+\floatstyle{ruled}
+\doublespacing
+
+\begin{document}
+\begin{titlepage}
+    \centering
+    \vspace*{1in}
+    {\Large University of Central Florida\par}
+    \vspace{0.2in}
+    {\large College of Business\par}
+    {\large ECO6935–25\par}
+    {\large Capstone in Business Analytics I\par}
+    \vspace{0.4in}
+    {\large Polina Baikova\par}
+    \vspace{1in}
+    {\LARGE Understanding Housing Market Dynamics and Residential Property Valuation Patterns in Orlando, Florida Using Hedonic Price Modeling\par}
+    \vfill
+    {\large July 2025\par}
+\end{titlepage}
+\setcounter{page}{1}
+\newpage
+\renewcommand{\thesection}{\arabic{section}}
+\input{Introduction.tex}
+\input{Institutional-Details.tex}
+\input{Economic-Model.tex}
+\input{Statistical-Model.tex}
+\input{Empirical-Specification.tex}
+\input{Empirical-Results.tex}
+\input{Recommendations.tex}
+\input{Limitations.tex}
+\input{Conclusions.tex}
+\input{Acknowledgments.tex}
+\input{Appendix-A.tex}
+\input{Appendix-B.tex}
+\input{Appendix-C.tex}
+\input{Appendix-D.tex}
+\singlespacing
+\nocite{*}
+\bibliographystyle{chicago}
+\bibliography{../References/PBaikova-References}
+\end{document}

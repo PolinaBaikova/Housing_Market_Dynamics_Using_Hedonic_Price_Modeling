@@ -1,0 +1,13 @@
+\subsection*{Appendix B}
+
+To incorporate transportation accessibility into the dataset, I used the \texttt{osmnx} Python package to download the full drivable road network for the Orlando metropolitan area --- including Orange, Seminole, Osceola, and Lake counties --- from \texttt{OpenStreetMap}, an open-access geospatial database. The network graph was filtered to retain only major highways, specifically Interstate 4 (I-4), State Roads 408, 417, 528, and Florida’s Turnpike, by selecting edges tagged as \texttt{motorway}, \texttt{motorway\_link}, \texttt{trunk}, or \texttt{trunk\_link}. Junction nodes, which represent highway exits, were extracted and matched to their respective highways based on keyword matches in the road name or reference tags. Using the \texttt{shapely} package for geometric computation, I developed a custom function that calculates the Manhattan distance from each residential property to the nearest exit for each of the five highways. Coordinates were first converted to a projected coordinate system (EPSG:26917) to ensure accurate distance measurement in meters. These computed distances were then stored as new variables in the dataset: \texttt{dist\_to\_i4}, \texttt{dist\_to\_sr408}, \texttt{dist\_to\_sr417}, \texttt{dist\_to\_sr528}, and \texttt{dist\_to\_turnpike}.
+
+The Manhattan distance from each home to the nearest highway exit was computed as:
+\[
+\text{Distance}_{\text{mi}}
+   = \frac{\displaystyle\min_i 
+            \bigl\lVert \mathbf{x}_{\text{home}} 
+                   - \mathbf{x}_{\text{exit}_i} \bigr\rVert_1}{1609.34},
+\]
+\noindent where $\mathbf{x}_{\text{home}}$ is the projected coordinate of a given home,  $\mathbf{x}_{\text{exit}_i}$ are the coordinates of all highway exits, $\lVert\mathbf{u}\rVert_1 
+ = |u_x| + |u_y|$ denotes the Manhattan ($\ell_1$) norm --- the sum of absolute east–north offsets, and $1609.34$ meters \(= 1\) mile converts the result to miles.

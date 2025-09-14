@@ -1,0 +1,31 @@
+\subsection*{Appendix A}
+
+In this appendix, I describe the source from which the data were collected and the transformations used for producing the final dataset.
+
+The empirical analysis is based on the Zillow Properties Listing Information dataset (CSV file), obtained through the Bright Data platform. This dataset compiles publicly available data from the Zillow real estate website and includes residential properties marked as sold between January 2023 and May 2025. The original file contains 26161 records and 130 variables covering structural characteristics, geographic location, market status, pricing, listing metadata, school proximity and quality, utility services, neighborhood and community features, as well as Zillow-specific identifiers, user interaction metrics,  historical sales and tax data. 
+
+Only a subset of variables was retained for analysis:
+\texttt{city}, \texttt{state}, \texttt{bathrooms}, \texttt{bedrooms}, \texttt{yearBuilt}, \texttt{streetAddress}, \texttt{zipcode}, \texttt{longitude}, \texttt{latitude}, \texttt{livingAreaValue}, \\
+\texttt{homeType}, \texttt{lastSoldPrice}, \texttt{schools}, \texttt{dateSold}, \texttt{county}, \texttt{hoa\_details}, \texttt{property}, and \texttt{community\_details}. These fields were selected because they contain information directly relevant to housing attributes, location, transaction details, and neighborhood context. Other columns were excluded because they were either irrelevant or redundant, presenting the same information in alternative forms or formats. 
+
+I removed outliers in the \texttt{sale\_price} variable by trimming the top and bottom 1percent  of the distribution. This was done using a quantile-based approach, retaining only the observations between the 1st and 99th percentiles.
+
+\texttt{home\_type} was categorized and label-encoded to distinguish between condominiums (1), townhouses (2), and single-family homes (3). 
+
+\texttt{age} was calculated as the difference between \texttt{dateSold} and \texttt{yearBuilt}, to better capture a property's depreciation over time. 
+
+\texttt{living\_area}, measured in square feet, represents the total internal floor space of the home. The number of bedrooms and bathrooms is taken directly from Zillow listings. 
+
+Columns \texttt{schools}, \texttt{hoa\_details}, \texttt{property}, and \texttt{community\_details} contain deeply nested structures rich in descriptive attributes. 
+
+The \texttt{schools} column contains a nested list of dictionaries, each representing a nearby school associated with the property. Each dictionary includes detailed information such as the school's name, distance from the property (in miles), grade levels served, educational level (Primary, Middle, or High), GreatSchools rating on a 1 -- 10 scale, and a link to the school’s profile on the GreatSchools website. The ratings categorize schools as follows: 1 -- 4 as “below average,” 5 -- 6 as “average,” and 7-- 10 as “above average”.  I extracted the distance and rating for the closest school at each level --- primary, middle, and high --- to incorporate the accessibility and quality of educational opportunities into the model.
+
+The nested \texttt{hoa\_details} column contains the following keys: \texttt{has\_hoa} (indicating whether the property belongs to a homeowners' association), as well as two lists, \texttt{amenities\_included} and \texttt{services\_included}, detailing the features and services provided by the HOA. For modeling purposes, I extracted two relevant features. First, I created a binary variable \texttt{hoa} based on the \texttt{has\_hoa} value. Second, I constructed the \texttt{recreational\_facilities} variable as a count of the most commonly listed amenities found in the \texttt{amenities\_included} field. These included: basketball courts, golf courses, pickleball courts, racquetball courts, shuffleboard courts, tennis courts, clubhouses, community pools, saunas, spas or hot tubs, and fitness centers. This transformation allowed the model to quantify the extent of recreational infrastructure associated with each property. 
+
+The nested \texttt{property} column includes lists of dictionaries under titles such as parking, features, lot, and details, contains structured metadata detailing physical characteristics of the home, including parking, architectural features, lot attributes, and legal or zoning information. From this column, I parsed the parking block to extract the number of total parking spaces and a binary indicator for the presence of a garage. From the lot block I extracted binary indicators: \texttt{above\_flood\_plain},  \texttt{city\_lot}, \texttt{historic\_district},  and \texttt{greenbelt}. \texttt{above\_flood\_plain} reflects whether the property is situated outside of designated flood-risk zones linked to FEMA flood map data. The \texttt{city\_lot} variable identifies homes located within the official boundaries of the City of Orlando, based on municipal zoning definitions. \texttt{historic\_district} reflects local preservation policies and architectural character.
+
+From the features block, I retained the number of building levels and created binary variables for the presence of a private pool, view as an indicator of whether the home offers a scenic outlook, and \texttt{water\_view} that specifies direct visibility of a water body such as a lake, river, or pond. These variables were chosen for their direct contribution to a property's functional utility and their expected significance in buyers’ valuation decisions.
+
+The nested \texttt{community\_details} column provides information about the broader residential development where the property is located, including "subdivision", "features" and "security". I extracted binary indicators for the presence of parks and playgrounds (based on keywords in "features"), as well as whether the property is located in a gated community (based on keywords in "security").
+
+Finally, I removed observations with missing values for critical variables or with clearly erroneous entries (for example, implausible square footage or sale prices). This step ensured data quality and consistency across all variables used in the empirical analysis.

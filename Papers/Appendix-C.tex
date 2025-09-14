@@ -1,0 +1,11 @@
+\subsection*{Appendix C}
+
+To identify closely-related predictors, I computed pairwise Pearson correlations. In Table~\ref{tab:high_corr}, I present variable pairs with absolute correlation coefficients greater than 0.50.
+
+
+
+Distances to highways, distances to schools, and school ratings exhibited high pairwise correlations. To address this, I introduced a set of composite and derived variables. 
+
+First, I created \texttt{min\_distance\_highway}, defined as the distance from each home to its nearest major highway exit, to replace individual highway distance variables. Second, I aggregated school-related information into two summary variables: \texttt{avg\_schools\_rating}, the mean rating across primary, middle, and high schools; and \texttt{avg\_distance\_to\_schools}, the average distance to each of the three closest schools by level. Finally, I transformed \texttt{living\_area} into \texttt{sqft\_per\_bedroom}, a functional measure of interior space per room that reduces redundancy between size-related variables while preserving interpretability.
+
+\input{Tables/high_corr_table.tex}

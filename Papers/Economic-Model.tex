@@ -1,0 +1,70 @@
+\section*{Economic Model}
+\subsection*{Hedonic Price Model}
+The hedonic price model is built on the notion that the price of a heterogenous good is determined by the combined value of its observed characteristics. This pricing method aims to decompose econometrically the observed variation in the price of a heterogeneous good and isolate the impact of these observed characteristics.
+
+Hedonic pricing model became an established approach in the twentieth century and has generated numerous achievements dealing with theoretical, methodological and empirical research. Kelvin Lancaster’s $1966$ work, ``A New Approach to Consumer Theory" laid the groundwork for the theoretical basis of hedonic modeling. Lancaster argued that utility is not derived from the good as a whole, but from the distinct characteristics it possesses, with total utility reflecting the combined contribution of each individual attribute. Although Lancaster laid the foundation for attribute-based valuation, it was Sherwin Rosen who formally developed the theory of hedonic pricing. In his $1974$ paper, ``Hedonic Prices and Implicit Markets: Product Differentiation in Pure Competition", Rosen argued that a price of a good can be interpreted as the sum of the individual prices of its characteristics. 
+
+Since its introduction, hedonic pricing theory has been widely adopted in housing market research, with many studies exploring how different property and neighborhood features are reflected in market prices through varying methodological approaches.
+In the context of housing, each residential unit can be represented by a vector of observable characteristics:
+\[
+\mathbf z=(z_{1},z_{2},\ldots,z_{k}), \quad \texttt{for} \quad k = 1, 2, ... K
+\]
+where $z_k$ measures the amount of the $k^{\text{th}}$ attribute that the house contains.
+In a competitive housing market, the hedonic price function maps the attribute bundle to its market price:
+\[
+P(\mathbf z)=f(z_{1},z_{2},\ldots,z_{k})
+\]
+
+\subsection*{Consumers side of the market}
+
+\textit{Utility-maximization.}  
+Consumer chooses composite consumption $x$ and housing bundle $\mathbf z$ that maximize their utility:  
+\[
+\max_{x,\mathbf z}\;U(x,\mathbf z)
+\quad\text{subject to}\quad
+y=x+P(\mathbf z)
+\]
+\noindent where $y$ denotes income.
+
+\textit{First-order conditions:}  
+
+\[ \frac{\partial U(x,\mathbf z) / \partial z_k}{\partial U (x,\mathbf z)/ \partial x} =  
+\frac{\partial p(\mathbf{z})}{\partial z_k} \]
+
+\noindent The right-hand side is the implicit price of attribute $k$; the left-hand side is the marginal rate of substitution between $z_{k}$ and the composite commodity.
+
+\subsection*{Producers side of the market}
+
+Producers supply goods of quality $\mathbf z$ and quantity $q$ to maximize profit:
+\[
+\max_{q,\mathbf z}\;\pi=qP(\mathbf z)-C(q,\mathbf z)
+\]
+
+\noindent Because a single house is typically marketed and sold as an indivisible unit, we will set $q=1$.
+
+\textit{First-order conditions:}
+\begin{align*}
+\text{(i)} \quad \;&\frac{\partial P(\mathbf z)}{\partial z_{k}}= \frac{\partial C(q,\mathbf z)}{\partial z_{k}}
+\\[4pt]
+\text{(ii)} \quad \;&P(\mathbf z)=\frac{\partial C(q,\mathbf z)}{\partial q}
+\end{align*}
+Condition (i) equates the implicit price of improving quality $z_{k}$ to its marginal cost; condition (ii) requires unit price to equal marginal production cost.
+
+\subsection*{Hedonic Equilibrium}
+
+An equilibrium, a house $\mathbf z^{*}$ is traded at a price $P(\mathbf z^{*})$, and there exist a consumer and a producer such that:
+
+\[
+\frac{\partial U(x^{*},\mathbf z^{*})/\partial z_{i}}{\partial U(x^{*},\mathbf z^{*})/\partial x}
+=
+\frac{\partial P(\mathbf z^*)}{\partial z_{k}}
+=
+\frac{\partial C(q^{*},\mathbf z^{*})}{\partial z_{k}}
+\]
+
+\noindent These conditions ensure that: (1) consumers choose $\mathbf z^{*}$ where their marginal willingness to pay equals the implicit price;
+(2) producers supply $\mathbf z^{*}$ where their marginal cost equals that same implicit price; and (3) the set of $P(\mathbf z^*)$ pairs satisfying these equalities traces the hedonic price function --- the locus where consumers' bid and producers' offer curves are tangent and the market clears.
+
+Estimation of implicit prices that reveal the consumers' marginal willingness to pay has been the focus of the majority of empirical hedonic analyses and is referred to as the first stage of the hedonic. The second stage involves recovering demand and supply functions for attributes.
+
+This project focuses on the first stage of the hedonic analysis, concentrating on estimating and interpreting the implicit prices from observed housing market transactions.

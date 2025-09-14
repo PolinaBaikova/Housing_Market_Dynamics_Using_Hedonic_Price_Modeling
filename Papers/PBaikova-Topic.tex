@@ -1,0 +1,58 @@
+\documentclass[11pt]{article}
+\usepackage{palatino}
+\usepackage[a4paper, top=1.0in, bottom=1.0in, left=1.0in, right=1.0in]{geometry}
+\usepackage{amsfonts,amsmath,amssymb}
+\usepackage{graphicx} 
+\usepackage{tikz}
+\usetikzlibrary{er,positioning}
+\usepackage[hyphens]{url}
+\linespread{2.0} 
+\usepackage{listings}
+\usepackage{caption}
+\usepackage{pdfpages}
+\usepackage{float}
+\usepackage{setspace}
+\usepackage{hyperref}
+\usepackage[numbers]{natbib}
+
+
+
+\begin{document}
+	
+	\pagestyle{empty}
+	{\noindent\bf Summer 2025 \hfill Polina Baikova}
+	\vskip 16pt
+	\centerline{\bf University of Central Florida}
+	\centerline{\bf College of Business}
+	\vskip 16pt
+	\centerline{\bf ECO6935-25}
+	\centerline{\bf Capstone in Business Analytics I}
+	\vskip 10pt
+	\centerline{\bf Understanding Housing Market Dynamics and Residential Property Valuation Patterns }
+	\centerline{\bf in Orlando, Florida Through Hedonic Price Modeling}
+	\vskip 22pt
+	\noindent
+	
+In Florida, housing demand has been significantly increasing, particularly in metropolitan areas, driven largely by migration patterns from northern states, economic opportunities, favorable tax policies, and attractive climate conditions.
+
+Between 2020 and 2024, the population of the Orlando Metropolitan Area increased by more than 9 percent, growing from approximately 2.68 million to nearly 2.94 million residents. In 2023 alone, the region added over 54,000 people, making it the fastest-growing large metro area in Florida. Forecasts suggest the population may increase by nearly one million by 2045, presenting challenges for housing supply and infrastructure planning \cite{bebr2023}.
+
+Orlando’s housing market also has undergone significant transformations. Over the past decade (2014–2024), Orlando's median home prices nearly doubled, rising from approximately \$160,000 to \$380,000 \cite{orlando2024}. During the same period, housing experienced an average annual inflation rate of approximately 3.66 percent. When adjusted for inflation, the 2014 price equates to roughly \$257,909 in 2024 dollars \cite{bls2024}. This suggests that a substantial portion of the observed price increase reflects real growth factors — such as rising demand and constrained housing supply — rather than inflation alone.
+
+The construction sector has actively responded to these population and market changes. In 2023, over 15,000 single-family building permits were issued, reflecting sustained builders' confidence in Orlando’s long-term growth \cite{hud2024}.
+
+Understanding housing market dynamics is crucial for informed decision-making by real estate developers, policymakers, urban planners, and investors. As housing demand intensifies and property values rise unevenly across neighborhoods, there is a need to identify the specific characteristics that drive home prices in the region \cite{gyourko2013}. Traditional valuation methods often overlook the complexity and heterogeneity of the housing stock, failing to account for how individual property features and neighborhood attributes contribute to overall price \cite{malpezzi2003}.
+
+The hedonic pricing method offers a data-driven approach to decompose prices into the implicit values of their underlying characteristics \cite{rosen1974}. By applying it to real estate and analyzing actual transaction data, this method can help to reveal how buyers value key features such as interior and exterior characteristics, neighborhood quality, or access to amenities. In a rapidly evolving market like Orlando, hedonic analysis can provide insights that support accurate property valuation, strategic development, and evidence-based urban policy \cite{palmquist2005}.
+
+The goal of this project is to estimate homebuyers’ valuations for individual housing attributes based on observed sales data in the Orlando area. The objective is to develop a reliable and generalizable hedonic price model that explains how structural and locational features contribute to property values. In doing so, the analysis will also explore how these valuations vary across ZIP codes, revealing spatial heterogeneity in buyer preferences.
+
+The project will utilize a “Zillow Properties Listing Information” dataset of Orlando-area home sales in 2023–2024. The dataset contains information on properties sold within these years – including sale price, various structural and location characteristics, and amenities. The hedonic model will be estimated using Ordinary Least Squares regression, supplemented with robustness diagnostics to assess model reliability. Upon finalizing the hedonic regression model, next steps will involve calculating marginal willingness-to-pay for key attributes, exploring spatial differences in consumer preferences by examining how these values vary across different areas within Orlando. The findings will offer actionable insights into buyer behavior, help identify the housing features that drive value, and inform pricing strategies and policy decisions in one of Florida’s fastest-growing real estate markets.
+
+	
+	
+\clearpage
+\bibliographystyle{chicago}
+\bibliography{../References/PBaikova-References.bib}
+	
+\end{document}

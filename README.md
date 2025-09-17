@@ -35,6 +35,12 @@ To analyze how housing attributes affect prices, I implemented multiple economet
 - Neighborhood effects were also significant: school quality, proximity to highways, and flood risk status shaped prices, though their influence varied by region.  
 - GAM analysis highlighted nonlinear dynamics, such as diminishing returns to home size and nonlinear effects of school quality.
 
+<img src="Figures/coefficients_central.jpg" alt="OLS Coefficients Central Orlando" width="600" height="500">
+
+<img src="Figures/coefficients_east.jpg" alt="OLS Coefficients East Orlando" width="600" height="500">
+
+<img src="Figures/GAM_coefficients.jpg" alt="GAM Coefficients" width="600" height="400">
+
 ## Practical Recommendations:
 - Buyers & Sellers: Identified which features add premiums and which reduce value, guiding purchase and marketing decisions.
 - Developers & Investors: Showed how to align projects with local preferences (e.g., gated subdivisions in suburbs vs. maximizing lot space in urban cores).

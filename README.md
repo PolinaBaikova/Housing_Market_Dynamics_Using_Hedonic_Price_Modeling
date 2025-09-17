@@ -39,7 +39,7 @@ To analyze how housing attributes affect prices, I implemented multiple economet
 
 <img src="Figures/coefficients_east.jpg" alt="OLS Coefficients East Orlando" width="600" height="500">
 
-<img src="Figures/GAM_coefficients.jpg" alt="GAM Coefficients" width="600" height="400">
+<img src="Figures/GAM_cefficients.jpg" alt="GAM Coefficients" width="600" height="400">
 
 ## Practical Recommendations:
 - Buyers & Sellers: Identified which features add premiums and which reduce value, guiding purchase and marketing decisions.

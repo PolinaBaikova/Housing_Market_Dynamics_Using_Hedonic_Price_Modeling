@@ -16,7 +16,7 @@ I built a custom Python ETL pipeline to clean and transform the dataset before m
 - Parsing deeply nested JSON-like fields into structured variables suitable for analysis.
 - Integrating geospatial analysis with **OSMnx** and **Shapely** to calculate Manhattan distances from each property to major highway exits.
 
-<img src="Figures/sale_price_distribution.png" alt="Sale Price Distribution" width="300" height="300">
+<img src="Figures/sale_price_distribution.png" alt="Sale Price Distribution" width="600" height="400">
 
 # Modeling Approach
 To analyze how housing attributes affect prices, I implemented multiple econometric and machine learning methods. The core model is a log-linear hedonic regression, which decomposes housing prices into the implicit value of individual features. To improve robustness and avoid overfitting, I incorporated LASSO regularization for variable selection, ensuring that only the most influential predictors were retained. In addition, I used Generalized Additive Models (GAMs) to capture nonlinear effects and diminishing returns, allowing the analysis to reveal more complex relationships between features and price. All models were built using Python with libraries such as `pandas`, `statsmodels`, `scikit-learn`, and `pyGAM`.
